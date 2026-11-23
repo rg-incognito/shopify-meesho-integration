@@ -1,0 +1,98 @@
+# Meesho -> Shopify pipeline settings. Secrets go in .env, not here.
+
+store:
+  name: The Noor Naksh
+  vendor: The Noor Naksh
+  extra_tags: []           # tags added to every product (visible to customers in some themes)
+
+pricing:
+  margin_percent: 40        # selling = cost * 1.40 + fixed_add
+  fixed_add: 70
+  extra_cost: 0             # per-unit packaging etc., added to Meesho cost before margin
+  round_ending: 9           # round UP so price ends in 9 (e.g. 571 -> 579). 99 -> ends in 99. null = no rounding
+  compare_at: mrp           # mrp | none | a multiplier like 1.6
+
+shopify:
+  shop: thenoornaksh.myshopify.com
+  api_version: "2026-07"
+  status_on_create: DRAFT   # DRAFT or ACTIVE
+  location_id: null         # null = first active location
+  stock_when_available: 10  # Shopify quantity while Meesho has it in stock
+  option_name: Size
+  # Sales channels every pushed product/new collection is published to (Online Store).
+  # A Draft stays hidden until you tap "Make Active" in Telegram.
+  publications: ["gid://shopify/Publication/318237507896"]
+  # Manual collections every pushed product is added to (created if missing), e.g. [New Arrivals]
+  default_collections: [New Arrivals]
+
+sheet:
+  worksheet: Products
+
+scraper:
+  chrome_path: C:\Program Files\Google\Chrome\Application\chrome.exe
+  debug_port: 9333
+  profile_dir: .chrome-profile
+  crop_bottom_percent: 5    # trims Meesho's supplier code ("S-123...") printed along the bottom of photos
+
+gemini:
+  text_model: gemini-3.5-flash
+  # tried in order; each has its own free daily quota (about 20 requests/day on the free tier)
+  text_models: [gemini-3.8-flash, gemini-3.7-flash, gemini-3.6-flash, gemini-3.5-flash,
+                gemini-3.5-flash-lite, gemini-3.1-flash-lite]
+  image_model: gemini-nano-banana-2.1
+  reference_images: 3       # how many Meesho photos to send as reference
+  aspect_ratio: "3:4"
+  fallback_to_original_images: true   # if AI images fail (e.g. no billing yet), use the Meesho photos
+  fallback_images: original           # studio = free CPU cut-out on a clean background; original = Meesho photos as-is
+
+listing_cleanup:            # applied to the original Meesho photos used in Shopify listings
+  enabled: true             # paint out the supplier code ("S-775771012") in the bottom-left corner
+  pad_to_portrait: true     # square/landscape photos padded to 4:5 so product cards don't crop them
+
+studio:
+  # off: rembg erased parts of white/cream/sheer garments and dupattas (Oct 2026); originals are used
+  use_in_listing: false
+  model: isnet-general-use  # rembg background-removal model (runs on CPU)
+  background: "#F4EDE1"     # brand cream
+  size: [1500, 2000]        # 3:4 portrait, matches the product cards
+  padding: 0.08
+  shadow_strength: 0.35
+  min_coverage: 0.10        # below this the photo is a size chart / graphic and is kept as-is
+  # One AI image is generated per shot. {title} and {details} are filled in.
+  shots:
+    - name: hero
+      prompt: >-
+        Create a professional e-commerce catalog photo of this exact product: {title}.
+        Product details: {details}.
+        Pure white seamless background, soft even studio lighting, product centred and fully visible.
+        The product must stay IDENTICAL to the reference photos: same colours, print, embroidery,
+        mirror work, borders, fabric texture and shape. Do not add or remove design elements.
+        Remove any text, watermarks, logos, price tags or stickers. No text in the image.
+    - name: model
+      prompt: >-
+        Create a realistic lifestyle fashion photo of an Indian woman wearing or using this exact
+        product: {title}. Product details: {details}.
+        Elegant festive setting, natural soft light, shallow depth of field, premium brand look.
+        The product must stay IDENTICAL to the reference photos: same colours, print, embroidery,
+        borders and fabric. The product is the hero of the image. No text, watermarks or logos.
+    - name: detail
+      prompt: >-
+        Create a close-up detail shot of this exact product: {title}, showing fabric texture and
+        craftsmanship (embroidery, print, borders). Product details: {details}.
+        Neutral warm-toned background, studio lighting, sharp focus.
+        Keep the design IDENTICAL to the reference photos. No text, watermarks or logos.
+
+pipeline:
+  auto_approve: false       # true = skip Telegram review, mark READY products APPROVED
+  push_on_approve: true     # push to Shopify as soon as you tap Approve
+  push_every_minutes: 60    # bot also pushes any APPROVED rows on this schedule (0 = off)
+  # Meesho price/stock re-check: every product is re-scraped about every `resync_every_hours`.
+  # Done in small rolling batches (every `resync_check_every_minutes`, `resync_batch_size` products
+  # at a time) so the bot never freezes for a long run and Meesho never sees a burst.
+  resync_every_hours: 12      # ~1,300 products: 2 h would mean ~110 scrapes per round
+  resync_check_every_minutes: 10
+  resync_batch_size: 20
+  # Listings written with the template (Gemini quota used up) are rewritten with AI by the bot:
+  # this many every 15 minutes until the day's free quota is gone (0 = off)
+  copy_upgrade_batch: 6
+  resync_daily_at: null     # old once-a-day full re-check ("03:00"); /resync still runs a full one

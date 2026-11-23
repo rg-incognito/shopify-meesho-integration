@@ -1,0 +1,234 @@
+# Instagram post styles — edit freely; changes apply on the next run (no restart needed).
+#
+# Each post = 1 product (top-to-bottom from the "Posts" sheet tab), carousel of `shots` images.
+# Every image gets a random scene + pose + face-hiding method from the lists below, with no
+# scene repeated inside a post and recently used scenes avoided (see `avoid_recent_scenes`).
+#
+# Modelled on @_.theglowcart_ (studied Oct 2026):
+#  - real-looking places (never studio), different place in every photo, Pinterest/iPhone look
+#  - simple poses: standing, walking away, hand on railing, holding the dupatta, sitting on steps
+#  - face never shown: hand over face, looking down with hair falling, turned away, back view,
+#    arms raised fixing hair, holding a phone up
+#  - outfit is the hero: full body, garment sharp and clearly visible, one detail/waist-up close-up
+#  - small faint handle watermark near the model, position varies
+#  - caption: emoji hook + "comment Link" CTA + brand tag, 5 hashtags, then a plain keyword line
+#  - comment automation: public reply ("sent dm 💌") rotating texts + DM with the link
+
+# api    = post through the Meta developer app (Graph API), with comment→DM automation
+# manual = at each posting time the bot sends the ready images/reel + caption in Telegram (copies in
+#          data/manual_ready/) for you to post in Meta Business Suite; tap "Mark posted" afterwards.
+#          No Meta API calls at all (comment→DM automation is off).
+publish_mode: manual
+posts_per_day: 5
+post_times: ["11:00", "13:30", "17:00", "19:30", "21:30"]   # one post at each time
+# products whose title contains any of these are queued as SKIP (change to post them)
+skip_keywords: [nightdress, nighty, nightwear, babydoll, lingerie, night suit]
+avoid_recent_scenes: 12          # don't reuse a scene used in the last N images
+image_size: [896, 1120]          # 4:5 portrait = Instagram feed maximum (taller images get cropped)
+kaggle:
+  steps: 8                       # Lightning LoRA steps (8 = best quality)
+  max_minutes: 600               # stop starting new images after this (Kaggle session limit is 12 h)
+  run_at: "00:30"                # bot starts the nightly batch at this time (IST)
+colour_carousel:                 # weekly: one design in all its colours (cover grid + a slide per colour), for approval
+  enabled: true
+  day: sunday
+  at: "11:00"
+gemini_web:                      # single-image posts made in the Gemini app (Chrome on this PC), sent for approval
+  enabled: true
+  run_at: ["10:00", "15:00"]     # at each time: the next QUEUED products (Active on the store)
+  products_per_run: 2            # 1 image per product, style picked from prompts/women|men|kid
+  faces: hidden                  # hidden = face never shown (as before); visible = natural face, looking away
+
+# Shot plan for each carousel, in order. `framing` text goes straight into the prompt.
+shots:
+  - name: hero
+    framing: "full-body shot, the complete outfit visible from head to toe, model centred"
+  - name: second-look
+    framing: "full-body shot from a slightly different angle, the outfit flowing naturally"
+  - name: detail
+    framing: >-
+      tight close-up photo from the chin down to the hips only: the camera is very close, the frame
+      is filled by the blouse and the top of the skirt so the fabric, print, embroidery and neckline
+      are sharp; the head is outside the top edge of the frame
+
+# Prompt template. Placeholders: {model} {garment} {pose} {face} {scene} {light} {framing} {lock}
+prompt: >-
+  Photorealistic candid Pinterest-style photograph shot on an iPhone, vertical 3:4.
+  {model} wearing exactly the outfit shown in the reference image ({garment}).
+  {face}. {framing}. Pose: {pose}.
+  Location: {scene}. Lighting: {light}.
+  Natural skin texture, realistic fabric folds, slight film grain, shallow depth of field.
+  {lock} IMPORTANT: her face must NOT be visible anywhere in the photo (no eyes, no smile).
+  No text, no watermark, no logo, no extra people in focus.
+
+garment_lock: >-
+  The outfit must stay IDENTICAL to the reference image: same colours, prints, patterns, borders,
+  embroidery, mirror work, neckline, sleeves and dupatta. Do not invent new patterns or change the
+  garment design.
+
+# Audience is detected from the product (kids sizes / collections / category).
+audiences:
+  women:
+    model:
+      - "A slim young Indian woman in her mid-20s with long dark wavy hair"
+      - "A young Indian woman with long straight dark hair and wheatish skin"
+      - "A young Indian woman with shoulder-length dark hair, slim build"
+    face_hiding:
+      - "her face is completely hidden by her raised hand, palm over her face, fingers touching her hair"
+      - "her head is bowed low and her long hair falls forward like a curtain, fully covering her face"
+      - "she is turned away from the camera, looking over her shoulder away, face not visible"
+      - "back view, she walks away from the camera, face not visible"
+      - "she holds a phone up in front of her face, face hidden"
+      - "both arms raised to fix her hair, her arms and hair hide her face"
+      - "she tucks her hair behind her ear with her head bowed so the face is hidden"
+    poses:
+      - "standing relaxed, one hand lightly holding the edge of the dupatta"
+      - "standing with one hand resting on a railing"
+      - "walking slowly, mid-step, the skirt swaying"
+      - "holding the skirt slightly out at both sides"
+      - "leaning lightly against a wall, one knee bent"
+      - "sitting on stone steps with the outfit spread around her"
+      - "standing in a doorway, one hand on the frame"
+      - "a gentle half-twirl, the skirt flaring"
+
+  kids:
+    model:
+      - "A cheerful 7-year-old Indian girl with long dark hair in a braid"
+      - "A 6-year-old Indian girl with a ponytail"
+      - "A 9-year-old Indian girl with long dark hair tied with a ribbon"
+    face_hiding:
+      - "back view, she walks away holding dandiya sticks, face not visible"
+      - "back view, she twirls away from the camera, face not visible"
+      - "she is turned away from the camera, face not visible"
+      - "she covers her face with both hands playfully, giggling"
+    poses:
+      - "standing and holding the skirt out at both sides"
+      - "mid-twirl, the skirt flaring out"
+      - "walking happily, mid-step"
+      - "holding two dandiya sticks"
+    scenes_only: [garba-night, diwali-lights, haveli-courtyard, marigold-entrance, temple-steps, garden-swing]
+
+  jewellery:
+    model:
+      - "A young Indian woman in a plain ethnic kurta"
+    face_hiding:
+      - "the photo is cropped from the lips down, face not visible"
+      - "she looks down and away, her hair hiding her face"
+    poses:
+      - "close-up of the neck and shoulders, wearing the jewellery"
+      - "close-up of the hand near the neck, showing the jewellery"
+    framing_override: "close-up shot of the jewellery being worn, the jewellery sharp and clearly visible"
+
+# Scenes: name -> description + light options. Kept Indian and real-looking.
+scenes:
+  haveli-courtyard:
+    text: "sunlit courtyard of an old Rajasthani haveli with white scalloped arches and terracotta potted plants"
+    light: ["bright natural daylight", "soft late-afternoon sun"]
+  bougainvillea-wall:
+    text: "a weathered peach wall covered with pink bougainvillea flowers"
+    light: ["soft overcast daylight", "dappled morning sun"]
+  arch-lights-night:
+    text: "a garden entrance at night with a glowing warm-light arch, black iron railings and vintage street lamps"
+    light: ["warm night lights, cinematic"]
+  palm-road:
+    text: "an empty road lined with tall coconut palms in Goa"
+    light: ["golden hour sunlight", "bright midday sun"]
+  lakeside-ghat:
+    text: "a lakeside ghat in Udaipur with old palaces and water behind"
+    light: ["warm sunset glow", "soft golden hour"]
+  temple-steps:
+    text: "the stone steps of an old carved temple with brass lion statues and a red wooden door"
+    light: ["soft daylight", "warm evening light"]
+  cafe-stairs:
+    text: "a cosy cafe with an orange wall, framed pictures and wooden stair railings"
+    light: ["warm indoor window light"]
+  diwali-lights:
+    text: "a garden at night decorated with green and gold fairy lights and diyas"
+    light: ["warm festive night lights"]
+  wedding-decor:
+    text: "an Indian wedding venue with big floral arrangements, pastel drapes and fairy lights"
+    light: ["soft warm indoor light"]
+  garba-night:
+    text: "a Navratri garba night with string lights, marigold garlands and softly blurred dancers"
+    light: ["warm festive night lights"]
+  marigold-entrance:
+    text: "a doorway decorated with orange marigold garlands and a rangoli on the floor"
+    light: ["soft daylight", "warm evening light"]
+  city-night-road:
+    text: "a city footpath at night with a row of street lights and blurred car lights"
+    light: ["cool night city lights"]
+  mountain-meadow:
+    text: "a green Himalayan meadow with pine trees and mountains in the distance"
+    light: ["soft cloudy daylight", "bright clear daylight"]
+  jasmine-garden:
+    text: "a lush garden path with jasmine bushes and old trees"
+    light: ["dappled morning sun"]
+  heritage-corridor:
+    text: "a long heritage corridor with carved stone pillars and jharokha windows"
+    light: ["soft side light from the windows"]
+  rooftop-sunset:
+    text: "a rooftop terrace with fairy lights and a city skyline at sunset"
+    light: ["warm sunset glow"]
+  garden-swing:
+    text: "a wooden swing hanging from a big tree decorated with flowers in a garden"
+    light: ["soft daylight"]
+
+watermark:
+  text: "@thenoornaksh.in"
+  opacity: 0.32        # 0-1
+  size: 0.018          # fraction of image height
+  # placed at a random spot in this box (fractions of width/height), like theglowcart does
+  region: [0.08, 0.55, 0.65, 0.9]
+
+caption:
+  # {hook} {title} {price} {mrp} {link} {hashtags} {keywords}
+  template: |-
+    {hook}
+    🎀 Comment "Link" and we'll DM you the link 🖇️🛍️
+    🛒 {title} · ₹{price}
+    🔗 {link}
+    .
+    {hashtags}
+    .
+    {keywords}
+  hooks:
+    - "🌸 Festive ready in one look"
+    - "✨ Pinterest girl era, desi edition"
+    - "💗 The outfit you'll get compliments in"
+    - "🪔 Your next festive favourite"
+    - "🌷 Soft, classy & effortless"
+  hashtags_by_audience:
+    women: ["#EthnicWear", "#IndianFashion", "#DesiFashion", "#OutfitInspo", "#TheNoorNaksh"]
+    kids: ["#KidsEthnicWear", "#KidsFashion", "#NavratriOutfit", "#LittlePrincess", "#TheNoorNaksh"]
+    jewellery: ["#IndianJewellery", "#OxidisedJewellery", "#JewelleryLover", "#EthnicJewellery", "#TheNoorNaksh"]
+  ai_note: "AI-generated styling images."   # appended at the end; also turn on Instagram's AI label
+
+facebook:
+  enabled: true   # also post every carousel to the Facebook Page and answer comments there
+                  # (needs a Page token: run `python fb_token.py`; skipped silently until then)
+
+# Products not Active on the store yet (Draft / unavailable, so no product page): still posted.
+# The caption links to the store home page and "Link" commenters get this DM instead; once the
+# product goes Active, new DMs send its real link automatically.
+no_store_link:
+  post_anyway: true            # false = wait until the product is Active (old behaviour)
+  store_url: ""                # blank = the store's main domain from Shopify
+  dm_template: |-
+    Hi {name} 💗 {title} is coming to our store soon!
+    Reply here to order it or to get the link as soon as it's live ✨
+    Meanwhile, see our latest styles: {link}
+
+comment_automation:              # same rules on Instagram and Facebook
+  check_every_minutes: 2      # only posts with new comments are fetched
+  keywords: ["link", "🔗", "price", "pp", "details"]   # matched case-insensitively
+  public_replies:
+    - "Sent dm 🫶"
+    - "Hi cutie 💗, sent dm 💌"
+    - "Check your DM 💌"
+    - "Sent! Please check your DMs ✨"
+    - "Hey! Please check your DM 💗. Didn't get it? Follow us and comment again ✨"
+  dm_template: |-
+    Hi {name} 💗 here's the link you asked for:
+    {title} · ₹{price}
+    {link}
+    Tap the link to order ✨

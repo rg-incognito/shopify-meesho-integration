@@ -1,0 +1,17 @@
+A festive fashion campaign collage, vertical 4:5 portrait, featuring the same young Indian woman in five poses and framings, all wearing the outfit from the uploaded image, set inside a sunlit haveli with arched doorways, lime-plastered warm-white walls, brass urlis with floating marigolds and green plants.
+
+OUTFIT (identical in every view, matching the uploaded product photo exactly): The [GARMENT, e.g., rani pink chanderi kurta set with gold block print and an organza dupatta]. Same colours, print, embroidery, neckline, sleeve length and dupatta in all five views.
+
+VIEWS, arranged dynamically with soft, blended edges (no hard borders):
+- Top-left (three-quarter shot): walking toward camera, laughing, dupatta lifting in the breeze.
+- Centre (full-length): standing in an arched doorway, one hand on the door frame.
+- Top-right (full-length, further back): seen from behind walking through the arches, showing the back of the outfit.
+- Bottom-left (seated): sitting on a carved jharokha ledge, skirt spread, holding a small brass diya.
+- Bottom-right (close-up): waist-up, adjusting an earring, showing the fabric texture and neckline work.
+[FACE, e.g., natural and partly turned away in each view].
+
+TYPOGRAPHY at the top centre: "[LINE 1, e.g., THE FESTIVE EDIT]" in a light, spaced serif; below it a large [COLOUR, e.g., deep maroon] serif "[MAIN WORD, e.g., DIWALI]"; below that "[SLOGAN, e.g., CRAFTED FOR CELEBRATIONS]" in small caps. Spelled exactly as written.
+
+LIGHT & CAMERA: Warm diffused sunlight, soft shadows, 85mm portrait look with natural depth of field, gentle grain, a warm lifestyle aesthetic.
+
+AVOID: Spelling mistakes, extra text, logos, watermarks, different outfits between views, distorted hands.

@@ -1,0 +1,16 @@
+A seamless side-by-side vertical diptych fashion presentation image, split evenly down the middle, showcasing an outfit worn by a model on the left and its corresponding flat-lay arrangement on the right. Both halves share a cohesive, soft, naturally diffused lighting scheme with gentle, realistic shadows and an elegant, minimalist aesthetic.
+
+Left half (Model Shot): A full-body, natural mirror-selfie style shot of a male model with [HAIR/PHYSICAL DETAILS, e.g., short dark wavy hair]. He is holding a smartphone in his right hand, obscuring his face naturally, with his left hand casually tucked into his pants pocket. He is wearing the featured outfit:
+- [TOP LAYER / SHIRT]: A [describe top, e.g., light sage-green textured linen button-down shirt], left unbuttoned at the top with sleeves casually rolled to the forearms.
+- [BOTTOMS]: A pair of [describe pants, e.g., relaxed-fit, wide-leg light beige pleated trousers].
+- [FOOTWEAR]: Casual [describe shoes, e.g., clean all-white minimalist sneakers].
+- [ACCESSORIES]: He wears a [describe accessories, e.g., classic silver watch] on his left wrist.
+The background is a minimal, bare room with plain, light-neutral walls and a smooth gray floor, lit by soft ambient side-lighting.
+
+Right half (Flat Lay / Knolling): A meticulously styled flat-lay photograph of the exact same outfit, captured from a direct top-down (overhead) perspective against a smooth, solid [BACKGROUND COLOR, e.g., warm off-white/beige] background.
+- Top section: The [TOP LAYER] is laid out beautifully to mirror how it is worn, with the collar open and sleeves rolled up, retaining natural organic fabric folds and a 3D drape. 
+- Middle section: Positioned neatly beneath the shirt are the [BOTTOMS], which are [describe folding style, e.g., cleanly folded in half to showcase the front pleat and a back pocket detail].
+- Bottom section: The [FOOTWEAR] is placed at the bottom, positioned side-by-side and angled slightly for a casual yet structured look.
+NO hangers, mannequins, or human elements are present in this right-hand half.
+
+Technical Specs: Shot in 8k resolution, photorealistic, with a unified muted and earthy color palette that highlights the high-quality textures of the fabrics (like linen and cotton). The seam dividing the two halves is perfectly straight and razor-sharp, creating a professional clothing brand catalog aesthetic.

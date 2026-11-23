@@ -1,0 +1,60 @@
+# Reel styles copied from viral reels (written by the bot: send it a reel video or link).
+# Same fields as reel_templates.yaml, plus:
+#   timing: beats | seconds   (seconds = the original cuts didn't follow the music)
+#   overlays: text shown from shot `from` up to (not incl.) shot `to`, centred at height y;
+#             text = hook | title | price | cta | any line ({short} {price} {title} {brand})
+#   text_style: box | outline
+
+templates:
+  v_guess_the_price:
+    description: A high-engagement reel that opens with a price guessing challenge, showcases stunning outfit photos
+      with smooth cuts, and reveals the actual price with a comment call to action.
+    copied: true
+    timing: beats
+    max_seconds: 13.0
+    text_style: box
+    hooks:
+    - Can you guess the price of this {short}? 👇
+    price_text: Just ₹{price} 😱
+    slots:
+    - source: hero
+      effect: zoom_in
+      beats: 4.0
+    - source: real
+      effect: drift
+      transition: whip
+      beats: 2.0
+    - source: any
+      effect: drift
+      transition: whip
+      beats: 2.0
+    - source: any
+      effect: drift
+      transition: whip
+      beats: 2.0
+    - source: any
+      effect: drift
+      transition: whip
+      beats: 2.0
+    - source: any
+      effect: still
+      transition: flash
+      beats: 4.0
+    - source: any
+      effect: still
+      transition: fade
+      beats: 5.0
+    overlays:
+    - from: 0
+      to: 1
+      text: hook
+      y: 0.15
+    - from: 5
+      to: 7
+      text: price
+      y: 0.8
+    - from: 5
+      to: 7
+      text: cta
+      y: 0.65
+    source: 20261013-082253

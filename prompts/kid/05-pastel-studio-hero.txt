@@ -1,0 +1,11 @@
+A clean, bright e-commerce hero photograph, vertical 4:5 portrait, of a [AGE, e.g., 7-year-old] Indian [GIRL/BOY] standing on a seamless studio backdrop in a soft pastel [BACKDROP COLOUR, e.g., mint / baby pink / butter yellow] that complements the outfit, with nothing else in the frame. The outfit is the only focus.
+
+OUTFIT (must match the uploaded product photo exactly): The child wears the [GARMENT, e.g., lavender kids anarkali gown with silver embroidery and a net dupatta] from the uploaded image. Same colours, fabric, embroidery placement, border, neckline, sleeve length and dupatta; nothing added or changed.
+
+POSE: Full length, centred, a natural child pose: holding the sides of the skirt (or the kurta hem) out a little and smiling, feet visible. [FACE, e.g., a natural happy smile looking just off camera].
+
+STYLING: Minimal, child-appropriate: [ACCESSORIES, e.g., a small bow hair clip], [FOOTWEAR, e.g., white ballet flats].
+
+LIGHT & CAMERA: Large soft key light from the front, gentle fill, a light rim to separate the outfit from the backdrop. Even exposure, accurate colours, no harsh shadows. 70mm lens at f/5.6, outfit tack sharp.
+
+AVOID: Makeup, adult poses, props, text, logos, watermarks, plastic fabric, over-smoothed skin, changed garment details.

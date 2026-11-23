@@ -1,0 +1,45 @@
+# Secrets & credentials
+.env
+*.json.key
+*-service-account*.json
+meesho-shopify-*.json
+data/fb_token.json
+data/ig_token.json
+data/gemini_web.json
+
+# Personal documents
+*.pdf
+
+# Runtime data (product DB, cache, logs)
+data/
+logs/
+images/
+music/
+.chrome-profile*/
+
+# Kaggle job artefacts
+kaggle/inputs/
+kaggle/post_inputs/
+kaggle/post_job/
+kaggle/qwen_job/
+kaggle/qwen_out/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+.DS_Store

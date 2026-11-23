@@ -1,0 +1,16 @@
+A candid, energetic fashion campaign collage based on image_5.png, featuring the same male model in multiple poses and framings, showcasing a men's traditional festive outfit inside an elegant, sunlit indoor venue with arched doorways, textured warm-beige walls, and indoor plants.
+
+The multi-pose photo collage of the young South Asian man has his dark wavy hair naturally styled as in image_5.png. He is wearing the signature ensemble from image_5.png:
+- A [COLOR AND MATERIAL, e.g., dusty pink (onion pink) linen-cotton] [TOP/SHIRT, e.g., kurta] featuring intricate, traditional [EMBROIDERY DETAILS, e.g., white-and-silver embroidery on the front panel and small matching motifs scattered over the chest and shoulders]. It has a [COLLAR TYPE, e.g., band collar], is worn [BUTTON STYLE, e.g., unbuttoned at the top], and has its long sleeves informally rolled up to the mid-forearms. He has a [ACCESSORIES, e.g., black smart watch on his left wrist].
+- He is wearing loose-fitting, relaxed [BOTTOMS, e.g., white pants (pajama trousers)] and casual [FOOTWEAR, e.g., all-white sneakers].
+
+The collage incorporates the following specific views, arranged dynamically:
+- Left-Center-Top (Three-quarter shot): The model faces forward, looking casually to the side, wearing the [TOP/SHIRT] and [BOTTOMS], raising his right hand as if captured mid-motion, with his left hand casually tucked into his pants pocket.
+- Center-Middle (Full-body shot): He is standing and looking to the left in a natural, candid posture, with one hand casually placed in his pocket. He is in full view, showing the loose drape of the [BOTTOMS] and [FOOTWEAR].
+- Right-Top (Full-body shot): Positioned further back in an arched doorway, he stands and faces the camera with a relaxed posture, his left hand in his pocket. 
+- Left-Bottom (Seated shot): The model is candidly sitting on the polished floor, cross-legged, holding a black smartphone with his left hand as if checking it or taking a self-reflection, with the other hand resting on his knee. He is looking down or slightly to the side.
+- Right-Bottom (Close-up shot): A candid, waist-up view showing the rich, textured fabric and intricate chest embroidery of the [TOP/SHIRT], with him glancing naturalistically.
+
+The collage is tied together with stylish, elegant typography at the top-center: "[SUBTITLE, e.g., FESTIVE FITS]" on the first line, "[SUBTITLE 2, e.g., FOR A BRIGHTER YOU]" on the second line in a light, serif font. Large, prominent, and stylized [FONT COLOR, e.g., dark burgundy-red] serif font below it reading "[MAIN TEXT, e.g., NAVRATRI]", and below that "[SLOGAN, e.g., TRADITION MEETS STYLE]" in a smaller, lighter font, matching the typography in image_5.png.
+
+The scenes are bathed in warm, diffused natural sunlight, casting soft shadows, captured with a professional portrait lens that creates a natural depth of field, with background arches, fluted wall panels, and large ceramic pots with dried foliage gently out of focus. Every view feels like a natural candid shot, with high-quality grain and a warm, lifestyle aesthetic. No visible seams or hard borders between the overlapping images, blending them as a cohesive campaign collage.

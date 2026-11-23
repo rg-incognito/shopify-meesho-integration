@@ -1,0 +1,90 @@
+# Reel templates (rendered on the laptop, CPU only). Re-read on every render, so edit freely.
+#
+# A template is a list of slots shown one after another, each lasting `beats` beats of the music
+# (120 BPM grid when there's no music in music/). Slot fields:
+#   source:     hero (first real photo) | real (Meesho photos) | ai (carousel / AI shots) | any (alternate)
+#   effect:     zoom_in | zoom_out | punch (snap on the beat) | pan_down | pan_up | drift | still |
+#               parallax (product cut out and floating over its blurred background; slower to render)
+#   transition: cut | flash | fade | whip   (how this slot starts)
+#   text:       hook | price | title | cta  (or a list, e.g. [title, price])
+#   repeat:     repeat this slot N times with the next photos
+# Text placeholders: {title} {short} {price} {brand}
+
+defaults:
+  template: angle_snap
+  max_seconds: 20          # slots past this are dropped (the last slot, the CTA, is always kept)
+  brand: "@thenoornaksh.in"
+  price_text: "Only ₹{price}"
+  cta: "Comment LINK 👇\nwe'll DM you the link"
+  hooks:
+    - "Wait for the last look 👀"
+    - "POV: you found your festive outfit ✨"
+    - "This one is selling fast 🔥"
+
+auto:                      # daily reels: rendered each morning, sent for approval, posted at post_times
+  enabled: true
+  per_day: 2
+  render_at: "07:30"       # (or as soon as the bot runs after this time)
+  post_times: ["12:15", "20:30"]   # one approved reel at each time (carousel posts use other times)
+  auto_approve: false      # true = post without asking (previews are still sent)
+  styles: []               # empty = rotate through every style, including copied viral ones
+  min_days_between: 30     # don't make another auto reel of the same product within N days
+
+templates:
+  angle_snap:
+    description: "Every angle, cut on the beat: hook, fast punch-zoom cuts through all photos, price + CTA"
+    hooks:
+      - "Every angle of this one 👀"
+      - "Watch till the end 👀"
+      - "Rate this look 1-10 👇"
+    slots:
+      - {source: hero, beats: 4, effect: zoom_in, text: hook}
+      - {source: any, beats: 1, effect: punch, repeat: 8}
+      - {source: hero, beats: 4, effect: zoom_out, text: [title, price], transition: flash}
+      - {source: any, beats: 4, effect: still, text: cta, transition: fade}
+
+  slow_reveal:
+    description: "Calm and premium: slow zooms/pans with fades, title, price, CTA"
+    hooks:
+      - "Soft, elegant and festive ready ✨"
+      - "The details on this one 🤍"
+    slots:
+      - {source: hero, beats: 6, effect: zoom_in, text: hook}
+      - {source: ai, beats: 4, effect: pan_down, transition: fade}
+      - {source: real, beats: 4, effect: drift, transition: fade, text: title}
+      - {source: any, beats: 4, effect: zoom_out, transition: fade, text: price}
+      - {source: hero, beats: 4, effect: still, transition: fade, text: cta}
+
+  price_reveal:
+    description: "Guess the price: hook question, quick looks with whip transitions, price flash, CTA"
+    hooks:
+      - "Guess the price 👀"
+      - "How much do you think this costs? 🤔"
+      - "Guess the price of this {short} 👇"
+    price_text: "Just ₹{price} 😱"
+    slots:
+      - {source: hero, beats: 4, effect: zoom_in, text: hook}
+      - {source: any, beats: 2, effect: drift, transition: whip, repeat: 4}
+      - {source: hero, beats: 4, effect: punch, transition: flash, text: price}
+      - {source: any, beats: 4, effect: still, transition: fade, text: cta}
+
+  float_3d:
+    description: "2.5D look: product cut out and floating over its blurred background, then real shots"
+    hooks:
+      - "This look is unreal ✨"
+      - "Festive season sorted 🪔"
+    slots:
+      - {source: hero, beats: 6, effect: parallax, text: hook}
+      - {source: ai, beats: 2, effect: punch, transition: flash, repeat: 3}
+      - {source: real, beats: 4, effect: parallax, transition: fade, text: [title, price]}
+      - {source: any, beats: 4, effect: still, transition: fade, text: cta}
+
+  your_sign:
+    description: "'This is your sign' trend: one line of text over calm shots, then CTA"
+    hooks:
+      - "This is your sign to get {short} 💫"
+      - "This is your sign to dress up this festive season ✨"
+    slots:
+      - {source: hero, beats: 8, effect: zoom_in, text: hook}
+      - {source: any, beats: 4, effect: drift, transition: fade, repeat: 2}
+      - {source: hero, beats: 4, effect: still, transition: fade, text: cta}
